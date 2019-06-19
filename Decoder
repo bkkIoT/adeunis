@@ -1,0 +1,40 @@
+function Decoder(bytes, port){
+
+	function Hex2Bin(n){if(!checkHex(n))return 0; var binstr=""; for (var i=0; i<n.length; i+=2) { binstr += parseInt(n[i]+n[i+1],16).toString(2); } return binstr;}
+    function checkHex(n){return/^[0-9A-Fa-f]{1,64}$/.test(n);}
+    function checkBin(n){return/^[01]{1,64}$/.test(n)}
+    function Bin2Dec(n){if(!checkBin(n))return 0;return parseInt(n,2);}
+
+
+
+	var param = {
+
+		"type": null,
+		"Frame_Counter": null,
+		"Hardware_error": null,
+		"Low_battery": null,
+		"configuration_done": null,
+  		"configuration_inconsistency": null,
+  		"presence_global_counter": null,
+  		"presence_current_counter": null,
+  		"luminosity_current_percentage": null
+	}
+	
+	for (var i = 0; i < bytes.length; i++){
+
+		if(0x4E === bytes[i]){
+			param.type = "0x4E Motion data"
+		}	
+
+		
+		if(0x4E === bytes[i]){
+			param.type = "0x4E Motion data"
+		}	
+
+
+	}
+
+
+	return param;
+
+}
