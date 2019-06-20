@@ -1,9 +1,7 @@
 function Decoder(bytes, port){
 
-	function Hex2Bin(n){if(!checkHex(n))return 0; var binstr=""; for (var i=0; i<n.length; i+=2) { binstr += parseInt(n[i]+n[i+1],16).toString(2); } return binstr;}
-    function checkHex(n){return/^[0-9A-Fa-f]{1,64}$/.test(n);}
-    function checkBin(n){return/^[01]{1,64}$/.test(n)}
-    function Bin2Dec(n){if(!checkBin(n))return 0;return parseInt(n,2);}
+	function Hex2Bin(hex){return ("00000000" + (parseInt(hex, 16)).toString(2)).substr(-8);}
+    function Bin2Dec(n){return parseInt(n,2);}
 
 
 
