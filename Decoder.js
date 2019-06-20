@@ -7,6 +7,7 @@ function Decoder(bytes, port){
 
 
 
+
 	var param = {
 
 		"type": null,
@@ -18,7 +19,7 @@ function Decoder(bytes, port){
   		"presence_global_counter": null,
   		"presence_current_counter": null,
   		"luminosity_current_percentage": null
-	}
+	};
 	
 	for (var i = 0; i < bytes.length; i++){
 
@@ -26,23 +27,23 @@ function Decoder(bytes, port){
 			param.type = "0x4E Periodic data";
 		}	
 		var status = Hex2Bin(bytes[1]);
-		param.Frame_Counter = Bin2Dec(status.splice(0,2)));
+		param.Frame_Counter = parseInt(status.charAt(0),10)*Math.pow(2,2) + parseInt(status.charAt(1),10)*Math.pow(2,1) + parseInt(status.charAt(2),10);
 		//ignorerer foreløpig reserved bit
-		if(status.charA(4) = 1){
+		if(parseInt(status.charAt(4)) === 1){
 			param.configuration_inconsistency = true;
-		}else if(status.charA(4) = 0){
+		}else if(parseInt(status.charAt(4)) === 0){
 			param.configuration_inconsistency = false;
-		}if(status.charA(5) = 1){
+		}if(parseInt(status.charAt(5)) === 1){
 			param.Hardware_error = true;
-		}else if(status.charA(5) = 0){
+		}else if(parseInt(status.charAt(5)) === 0){
 			param.Hardware_error = false;
-		}if(status.charA(6) = 1){
+		}if(parseInt(status.charAt(6)) === 1){
 			param.Low_battery = true;
-		}else if(status.charA(6) = 0){
+		}else if(parseInt(status.charAt(6)) === 0){
 			param.Low_battery = false;
-		}if(status.charA(7) = 1){
+		}if(parseInt(status.charAt(7)) === 1){
 			param.configuration_successfull = true;
-		}else if(status.charA(7) = 0){
+		}else if(parseInt(status.charAt(7)) === 0){
 			param.configuration_successfull = false;
 		}
 
@@ -59,3 +60,5 @@ function Decoder(bytes, port){
 	return param;
 
 }
+
+
